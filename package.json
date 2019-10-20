@@ -1,7 +1,7 @@
 {
   "name": "sk-heapjs",
   "version": "1.0.0",
-  "main": "heap.js",
+  "main": "src/heap.js",
   "repository": "https://github.com/skazantsev/heapjs",
   "author": "Sergey Kazantsev",
   "license": "MIT",
