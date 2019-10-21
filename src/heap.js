@@ -1,5 +1,4 @@
 export default class Heap {
-    // Time complexity - O(N) where N is a number of elements in the passed array
     constructor(items = null, compare = null) {
         if (items != null && !Array.isArray(items))
             throw new Error('Invalid array.');
@@ -13,47 +12,40 @@ export default class Heap {
         this.heapify();
     }
 
-    // Time complexity - O(N)
     heapify() {
         for (let i = Math.floor(this.size - 1); i >= 0; --i) {
-            this.__heapifyDown(i);
+            this.heapifyDown(i);
         }
     }
 
-    // Time complexity - O(logN)
     push(item) {
         this.items.push(item);
-        this.__heapifyUp(this.size - 1);
+        this.heapifyUp(this.size - 1);
     }
 
-    // Time complexity - O(logN)
     pop() {
         if (this.size === 0)
             return null;
 
         this.__swap(0, this.size - 1);
         const min = this.items.pop();
-        this.__heapifyDown(0);
+        this.heapifyDown(0);
         return min;
     }
 
-    // Time complexity - O(1)
     peek() {
         return this.size > 0 ? this.items[0] : null;
     }
 
-    // Time complexity - O(1)
     clear() {
         this.items.splice(0, this.size);
     }
 
-    // Time complexity - O(1)
     get size() {
         return this.items.length;
     }
 
-    // Time complexity - O(logN)
-    __heapifyDown(index) {
+    heapifyDown(index) {
         const child_left_index = index * 2 + 1;
         const child_right_index = index * 2 + 2;
 
@@ -69,18 +61,17 @@ export default class Heap {
 
         if (this.compare(this.items[index], this.items[min_index]) > 0) {
             this.__swap(index, min_index);
-            this.__heapifyDown(min_index);
+            this.heapifyDown(min_index);
         }
     }
 
-    // Time complexity - O(logN)
-    __heapifyUp(index) {
+    heapifyUp(index) {
         const parent_index = Math.floor((index - 1) / 2);
         if (
             parent_index >= 0 &&
             this.compare(this.items[parent_index], this.items[index]) > 0) {
                 this.__swap(index, parent_index);
-                this.__heapifyUp(parent_index);
+                this.heapifyUp(parent_index);
         }
     }
 
